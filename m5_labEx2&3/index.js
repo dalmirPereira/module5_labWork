@@ -8,7 +8,7 @@ const port = 3000;
 // Connecting calculator.html static front-end page
 
 // Serve static files from the 'public' folder
-app.use(express.static(path.join('/.public', 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Route to serve the index.html file
 app.get('/', (req, res) => {
