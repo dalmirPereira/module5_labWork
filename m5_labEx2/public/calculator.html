@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        input {
+            width: 50px;
+        }
+        label {
+            width: 150px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div>
+            <h1>Two Numbers Calculator</h1>
+        </div>
+
+        <div>
+            <div>
+                Choose two numbers and the operator:
+            </div>
+
+            <form id="calculator" action="#">
+                <div>
+                    <label for="firstNumber">First Number:</label>
+                    <input type="text" size="20px" id="firstNumber" name="firstNumber">
+                </div>
+                <div>
+                    <label for="operator">Operator:   </label>
+                    <select id="operator">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="/">/</option>
+                        <option value="*">*</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="secondNumber">Second Number:</label>
+                    <input type="text" id="secondNumber" name="secondNumber">
+                </div>
+
+                <button type="submit">Calculate</button>
+            </form>
+
+            <div>
+                <h2> Result: </h2>
+                <ul id="result"></ul>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        //Calculate button action submit
+        document.getElementById('calculator').addEventListener('submit', (event) => {
+            //prevent the page to reload
+            event.preventDefault();
+
+            //get all the elements from the form.
+            const firstNumber = document.getElementById('firstNumber').value;
+            const secondNumber = document.getElementById('secondNumber').value;
+            const operator = document.getElementById('operator').value;
+            //console.log(firstNumber, secondNumber, operator);
+
+            switch (operator) {
+                case '+':
+                    callAPI(`/calculator/add?num1=${firstNumber}&num2=${secondNumber}`)
+                    break;
+                case '-':
+                    callAPI(`/calculator/sub?num1=${firstNumber}&num2=${secondNumber}`)
+                    break;
+                case '*':
+                    callAPI(`/calculator/mul?num1=${firstNumber}&num2=${secondNumber}`)
+                    break;
+                case '/':
+                    // Check for division by zero
+                    if (Number(secondNumber) === 0) {
+                        return "Error: Division by 0.";
+                    }
+                    callAPI(`/calculator/div?num1=${firstNumber}&num2=${secondNumber}`)
+                    break;
+            }
+        });
+
+        //template for API
+        function callAPI(endpoint) {
+            fetch(endpoint)
+                .then(res => res.json())
+                .then(data => {
+                document.getElementById("result").innerHTML = data.result;
+                document.getElementById("calculator").reset();
+                })
+                .catch(err => console.error(err));
+        };
+    </script>
+</body>
