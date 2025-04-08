@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="/calculator.css">
+</head>
+
+<body>
+    <section>
+        <div>
+            <h1>Two Numbers Calculator</h1>
+        </div>
+
+        <div>
+            <div>
+                Choose two numbers and the operator:
+            </div>
+
+            <form id="calculator" action="#">
+                <div>
+                    <label for="firstNumber">First Number:</label>
+                    <input type="text" size="20px" id="firstNumber" name="firstNumber">
+                </div>
+                <div>
+                    <label for="operator">Operator:   </label>
+                    <select id="operator">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="/">/</option>
+                        <option value="*">*</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="secondNumber">Second Number:</label>
+                    <input type="text" id="secondNumber" name="secondNumber">
+                </div>
+
+                <button type="submit">Calculate</button>
+            </form>
+
+            <div>
+                <h2> Result: </h2>
+                <div id="result"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="/calculator.js"></script>
+</body>
